@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>loading...</title>
+    <link href="css/global.css" rel="stylesheet" type="text/css">
+    <link href="css/nc_layout.css" rel="stylesheet" type="text/css">
+    <link href="css/scrollbar.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="dillDetail" style="overflow-y: scroll;width: 100%;" onscroll="srocllEvent()">
+    <section style="width:100%;height:auto;">
+        <ul class="order_document_ul" style="display:none;" id="firstLineInfoUl">
+            <li id="goTaskBill" class="firstmargin"><font class="documentWholeLabel"><!-- 单据全貌 --></font></li>
+            <li class="attachmentNumber" style="display: none;"><span><font class="enclosureLabel">（0）</font></span></li>
+            <li id="goFlowChart"><font class="flowChartLabel"><!-- 流程图 --></font></li>
+        </ul>
+        <!-- 审批历史 -->
+        <div class="content" id="content" style="display: none;">
+            <article></article>
+        </div>
+        <!-- 单据信息 -->
+        <div class="order_rows bill_margin">
+            <ul class="head_tab" style="display: none;">
+
+            </ul>
+            <ul class="order_open bordernone" id="order_open"></ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="order bill_margin" id="order_bill">
+            <div class="order_openh1" style="display:none" id="billName">单据明细</div>
+            <div class="nav-wrapper" id="navTab">
+                <ul class="documentdetail_tab" id="nav"></ul>
+            </div>
+            <div id="navTabHeight" style="width:100%;display:none;"></div>
+        </div>
+        <!-- 审批历史 -->
+        <div class="content" id="content2" style="display: none;">
+            <article></article>
+        </div>
+    </section>
+</div>
+
+<!-- 审批动作 -->
+<footer class="footer" id="taskAction"></footer>
+
+<div class="mask" id="assign" style="display:none;">
+    <!-- 选择指派人 -->
+    <div class="assign_count" id="assign_count">
+        <div class="assign_people">
+            <ul class="assign_people_ul">
+                <li><span class="assignToLabel"><!-- 指派给: --></span></li>
+                <li id="assign_person"><!--控制在10个字超出部分...--></li>
+                <li><a href="#" class="point" id="showUserList"></a></li>
+            </ul>
+        </div>
+        <div class="assign_people_text">
+            <textarea name="" cols="" rows="" placeholder="<!-- 请在此处输入内容 -->" class="assign_text"></textarea>
+        </div>
+        <div class="assign_people_btns">
+            <a href="javascript:void(0);" class="Determine" id="closeShenpi"><span
+                    class="cancelLabel"><!-- 取消 --></span></a>
+            <a href="javascript:void(0);" class="font_bload" id="shenpi"><span
+                    class="aprovalLabel"><!-- 批准 --></span></a>
+        </div>
+    </div>
+
+
+    <!-- 指派人 -->
+    <div class="assign_modal" id="userList" style="display:none;">
+        <div class="select">
+            <a href="#" class="select_icon"></a>
+            <span class="input_wrapper">
+                <form name="selectForm" id="selectForm" action=".">
+                <input id="search_input"
+                       type="search"
+                       oninput="searchUserList(this.value);"
+                       onpropertychange="searchUserList(this.value);"
+                       class="inputreject search_text"
+                       placeholder="<!-- 搜索 -->" results="0"
+                       autocomplete="off" autocapitalize="none"/>
+                    </form>
+            </span>
+        </div>
+        <div class="contact_person_count"></div>
+        <div class="assign_people_btns">
+            <a href="javascript:void(0);" class="Determine" id="userListCancal"><span
+                    class="cancelLabel"><!-- 取消 --></span></a>
+            <a href="javascript:void(0);" class="font_bload" id="userListSure"><span
+                    class="determineLabel"><!-- 确定 --></span></a>
+        </div>
+    </div>
+</div>
+
+<div class="mask" id="personInfo" style="display:none;"></div>
+
+</div>
+</body>
+</html>
+<script src="js/lib/require.js"></script>
+<script>
+    // 华衍水务适配summer框架
+    var ua = window.navigator.userAgent ;
+    window.isSummer=false ;
+    if( ua.indexOf('SummerBrowser')!=-1 ){
+        require(['./js/lib/uapmobile/uapmobile.js'],function(uapmobile){
+            uapmobile.init()
+        });     
+    };
+
+    requirejs(['./js/common'], function(common) {
+        require(['app/billDetail', './js/app/billDetailLang.js'], function(billDetail) {
+            billDetail.init();
+        }, function(error) {
+            console.error(error);
+        });
+    });
+</script>

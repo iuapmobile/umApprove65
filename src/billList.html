@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+<meta content="telephone=no" name="format-detection" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>loading...</title>
+<link href="css/global.css" rel="stylesheet" type="text/css">
+<link href="css/nc_layout.css" rel="stylesheet" type="text/css">
+<!-- <link href="css/dialog.css" rel="stylesheet" type="text/css"> -->
+</head>
+<body>
+<div class="search_first" id="billListSearch"></div>
+<div class="fab" id="billCategory" style="display:none;">
+    <span>类</span>
+</div>
+<!--</div>-->
+<div class="popover" style="display:none;">
+    <div class="popover-arrow"></div>
+	<div class="scroll-content">
+	</div>
+</div>
+<!-- 登陆页面 -->
+<input type="hidden" name="headStr" id="headStr" value=""/>
+<div id="loginPage" style="display: none;">
+	<div class="logo">
+	     <img src="images/sp.png"/>
+	</div>
+	<form>
+	<div class="submit_count">
+	     <section class="inner_content">
+	              <li class="li_user" style="border-bottom:#e1e1e1 solid 1px;"><input type="text" class="username_text"  placeholder="<!-- 用户名 -->" id="username"/></li> 
+	              <li class="li_user"><input type="password" class="password_text" placeholder="<!-- 密码 -->" id="userpass"/></li>
+	     </section>
+	</div>
+	     <button type="button" class="submit_btn loginLabel" id="login">登 录</button>
+	</form>
+</div>
+<!-- 任务列表页面 -->
+<div id="indexPage" style="display: none;">
+	
+    <ul id="header">
+       <!--  <li class="select"><span class="noDealedLabel">待办</span></li> 
+        <li><span class="dealedLabel">已办</span></li> 
+        <p class="line_bottom2" id="header_line"></p> -->
+    </ul>
+   	<div class="nc_select_all">
+	    <ul class="nc_select">
+	        <li class="all"><span class="allChoiseLabel"><!-- 全选 --></span></li> 
+	        <li><span class="ApprovalLabel"><!-- 审批 --></span></li> 
+	    </ul>
+	</div>
+
+
+	<div class="clearfix"></div>
+	<div class="batch_mode"><img src="images/batch_mode.png"/></div>
+	<div class="batch_mode_open"><div class="img"></div>
+		<div class="text">
+			<span class="batchLabel" id="batchLabel">批量模式</span>
+			<a href="javascript:void(0);" id="wxLogout">注销</a></div>
+	</div>
+	<div class="nc_list" id="wrapper">
+		<div id="scroller" style="position:absolute;top:-1px;z-index: 99; width:100%;">
+		  
+		 </div>
+	</div>
+	
+	<!-- 侧边收缩按钮（注销、批量审批） 
+	<div class="batch_mode_weixin_open" id="logout_box" style="diaplay:none;">
+		<div class="img" id="in_out_btn">
+		</div>
+		<div class="text" id="logout_btn">
+			<span class="batchLabel" id="batchLabel">批量模式</span>
+			<span class="batchLabel" id="wxLogout">注销</span>
+		</div>
+	</div>
+	-->
+<!-- 批量审批弹出框 -->
+<div class="mask" id="billSp" style="display:none;">
+	<div class="batch_approval">
+	     <div class="select"><span></span><i id="closeBillSp"></i></div>
+	     <div class="text">
+	          <textarea name="" cols="" rows="" placeholder="请输入审批意见" id="batchSp_text" class="batchSp_text"></textarea>
+	     </div>
+	     <div class="batch_btns">
+	          <a href="javascript:void(0);" id="bpz"><span class="notApproveLabel"><!-- 不批准 --></span></a>
+	          <a href="javascript:void(0);" class="Determine" id="bh"><span class="dismissedLabel"><!-- 驳回 --></span></a>
+	          <a href="javascript:void(0);" class="font_bload" id="pz"><span class="approveLabel1"><!-- 批准 --></span></a>
+	     </div>
+	</div>  
+</div>
+<footer id="footer">
+</footer>
+
+</div>
+
+
+<script type="text/javascript" src="js/lib/require.js"></script>
+<script type="text/javascript">
+	require(['./js/common'], function(common) {
+		require(['app/billList', './js/app/billListLang.js'], function(billList) {
+			billList.login();
+		}, function(error) {
+			console.error(error);
+		});
+	});
+</script>
+
+</body>
+</html>
+

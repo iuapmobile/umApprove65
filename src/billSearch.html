@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>loading...</title>
+    <link href="css/global.css" rel="stylesheet" type="text/css">
+    <link href="css/nc_layout.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="search_result_first">
+    <div class="search_result_input_first">
+        <div class="search_result_center" style="display:none;"><span class="search_result_icon"></span>搜索</div>
+        <span class="search_result_on"></span>
+        <form name="selectForm" id="selectForm" action=".">
+            <input type="search" class="search_result_on_input"
+                   id="search_result_on_input" style="width: 86%;"
+                   placeholder="请输入关键字" results="0"
+                   autocomplete="off" autocapitalize="none"/>
+        </form>
+        <!--<a href="" class="search_result_on_closed"></a>-->
+    </div>
+</div>
+<!-- 任务列表页面 -->
+<div id="indexPage" style="display: none;">
+    <div class="clearfix"></div>
+    <div class="nc_list" id="wrapper">
+        <div id="scroller" style="position:absolute;top:-1px;z-index: 99; width:100%;">
+            <div id="showSearchList">
+                <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                       style="background-color:rgb(255, 255, 255);">
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="js/lib/require.js"></script>
+<script>
+    requirejs(['./js/common'], function(common) {
+        require(['app/billSearch', './js/app/billListLang.js'], function(billSearch) {
+            billSearch.login();
+        }, function(error) {
+            console.error(error);
+        });
+    });
+</script>

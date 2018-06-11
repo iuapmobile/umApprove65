@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+<meta content="telephone=no" name="format-detection" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>loading...</title>
+<link href="css/global.css" rel="stylesheet" type="text/css">
+<link href="css/nc_layout.css" rel="stylesheet" type="text/css">
+<link href="css/scrollbar.css" rel="stylesheet" type="text/css">
+</head>
+<body> 
+<div class="annex_list" id="annex_list">
+	<div class="annex_data_list"></div>
+</div>
+<div class="flow_chart" id="pictrue" style="display:none;"></div>
+<!-- Swiper -->
+<div class="swiper-container">
+        <div class="swiper-wrapper"></div>
+        <!-- <footer class="footer" style="z-index:100; background:none;">
+		           <div class="footer_img" style="color:#fff; float:right; margin-right:10px; text-align:right;height:50px;line-height:50px;"></div>
+		</footer> -->
+</div>
+</body>
+</html>
+<script src="js/lib/require.js"></script>
+<script>
+    requirejs(['./js/common'], function(common) {
+        require(['app/annex', './js/app/annexLang.js', './js/lib/QYZoneJSBridge.js'], function(annex, annexLang) {
+            annex.init();
+        }, function(error) {
+            console.error(error);
+        });
+    });
+</script>

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=2.0" name="viewport" />
+<meta content="telephone=no" name="format-detection" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>loading...</title>
+<link href="css/global.css" rel="stylesheet" type="text/css">
+<link href="css/nc_layout.css" rel="stylesheet" type="text/css">
+<link href="css/scrollbar.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background:#fff;">
+<div class="flow_chart" id="pictrue"></div>
+<div class="flow_chart" id="pictrue_next"></div>
+<div class="footer" style="text-align:center;display:none;" id="pic_next">
+		<ul style=" width:100%; height:48px; background-color:#fff; text-align:center; position:fixed; bottom:0px; left:0px;">
+	    	<li style="width:100%; height:28px; margin:10px 0px; float:left; font-size:18px; line-height:28px; color:#f25257; cursor: pointer;border-left:#f0f0f0 solid 1px; box-sizing:border-box;">子流程图</li>
+		</ul>
+</div>
+</body>
+
+</html>
+<script src="js/lib/require.js"></script>
+<script>
+	requirejs(['./js/common'], function(common) {
+		require(['app/OAflowChart', './js/app/OAflowCharLang.js'], function(OAflowChart) {
+			OAflowChart.init();
+		}, function(error) {
+			console.error(error);
+		});
+	});
+</script>

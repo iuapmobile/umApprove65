@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=3.0, user-scalable=yes" name="viewport" />
+<meta content="telephone=no" name="format-detection" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>loading...</title>
+<link href="css/global.css" rel="stylesheet" type="text/css">
+<link href="css/nc_layout.css" rel="stylesheet" type="text/css">
+<link href="css/scrollbar.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background:#fff;">
+<div class="flow_chart" id="pictrue"></div>
+	<table width="100%" cellpadding="0" cellspacing="0" border="0" style=" background:#fff; display:none;" id="notHtmlContent">
+	  <tbody>
+	    <tr>
+	      <td width="10%">
+	      </td>
+	      <td width="90%">
+	      </td>
+	    </tr>
+	    <tr id="tr_0" data-fileid="0a6ef561-d488-47db-884d-592b5232819f" data-filename="重复规则叠加异常.PNG"
+	    data-downflag="0" class="download" data-imgindex="0">
+	      <td align="right" valign="middle">
+	        <div id="notHtmlContent_img1" class="annex_imgpng">
+	        </div>
+	      </td>
+	      <td>
+	        <div style="float:left;" id="notHtmlContent_name1">
+	          重复规则叠加异常.PNG
+	        </div>
+	        &nbsp;&nbsp;
+	        <span class="nc_color" style="font-size:12px;" id="notHtmlContent_size1")>
+	          (92 KB)
+	        </span>
+	        <span id="downLoading_0" style="display:none;padding-top:10px;">
+	          <img src="images/waiting.gif" class="downLoadingImg" width="16px">
+	        </span>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td>
+	      </td>
+	      <td style="border-bottom:#e9e9e9 solid 1px;">
+	      </td>
+	    </tr>
+	  </tbody>
+	</table>
+</body>
+</html>
+<script src="js/lib/require.js"></script>
+<script>
+
+	/**
+	 * Created by lijmc on 2016-03-01.
+	 */
+	var QYJ = {
+	    createNewBridge:function(initparam){
+	        //定义对象
+	        var Bridge =function(){
+
+	            //获取设备唯一标识
+	            this.getDeviceID = function(param,callback){
+	                connectWebViewJavascriptBridge("yyGetDeviceUUID",param,callback);
+	            };
+	            //获取地理位置
+	            this.getLocation = function(param,callback){
+	                connectWebViewJavascriptBridge("yyGetLocation",param,callback);
+	            };
+				//是否启用WPS
+	            this.isInstallWPS = function(param,callback){
+	                connectWebViewJavascriptBridge("yyAlreadyInstallWPS",param,callback);
+	            };
+	            //获取位置信息
+	            this.editWPS = function(param,callback){
+	                connectWebViewJavascriptBridge("yyEditFileWithWPS",param,callback);
+	            };
+				//获取相机
+				this.openCamera = function(param,callback){
+	                connectWebViewJavascriptBridge("yyOpenCamera",param,callback);
+	            };
+				
+	            //连接客户端方法
+	            var  connectWebViewJavascriptBridge=function(type,param,callback){
+	                //执行方法
+	                if (window.YYWebViewJavascriptBridge) {
+	                   try{
+	                       YYWebViewJavascriptBridge.init(function(message, responseCallback) {
+	                           responseCallback();
+	                       });
+	                   }catch (e){}
+	                	window.YYWebViewJavascriptBridge.callHandler(type, param, callback);
+	                } else {
+	                    document.addEventListener("WebViewJavascriptBridgeReady",function() {
+	                        try{
+	                    		YYWebViewJavascriptBridge.init(function(message, responseCallback) {
+									responseCallback();
+								});
+							
+								bridge.registerHandler("filechange", function(data, responseCallback) {
+									alert('goback'+data);
+	               					responseCallback(responseData);
+								});
+								}catch (e){
+	                        }
+	                    	YYWebViewJavascriptBridge.callHandler(type, param, callback);
+	                        }, false);
+	                };
+	            };
+	        }
+	        return new Bridge();
+	    },
+	}
+
+
+	requirejs(['./js/common'], function(common) {
+		require(['app/OAbillContent', './js/app/OAbillContentLang.js','./js/lib/QYZoneJSBridge.js'], function(OAbillContent) {
+			OAbillContent.init();
+		}, function(error) {
+			console.error(error);
+		});
+	});
+</script>

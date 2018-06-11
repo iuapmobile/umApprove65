@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>loading...</title>
+    <link href="css/global.css" rel="stylesheet" type="text/css">
+    <link href="css/nc_layout.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        .cant_choost{ opacity: .2 }
+    </style>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="js/lib/flashcanvas.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<!-- 审批动作模块 -->
+<div id="doActionDiv" style="display:block;">
+    <div class="cc_opinion" id="cc_textarea_title">审批意见
+        <span class="bar_icon add" id="getNoteListIcon"></span>
+        <span class="bar_icon handwrite" id="getHandWriteIcon"></span>
+    </div>
+    <div class="cc_textarea_count" id="cc_textarea_content">
+        <textarea name="" cols="" rows="" class="cc_textarea" id="aprovalNote" placeholer=""></textarea>
+    </div>
+    <div id="cc_opinionDiv" style="overflow-x:hidden;overflow-y:auto;">
+        <div class="cc_opinion" id="assign" style="display:none;">指派给 <a href="#" id="assignIcon" class="cc_add"></a>
+        </div>
+        <ul class="cc_zpg" id="assignActivity">
+        </ul>
+
+        <div class="cc_mar12"></div>
+        <ul class="organization" id="reject" style="display:none;">
+            <li>
+                驳回<span id="rejectPerson" class="cc_people"
+                        style="display:none; float:right; margin:12px 45px 0px 0px;"></span><a href="#"
+                                                                                               class="rt_line"></a>
+            </li>
+            <div class="cc_copy_count" id="reject_List" style="display:none;">
+
+            </div>
+        </ul>
+
+        <div class="cc_mar12"></div>
+        <ul class="organization" id="reassign" style="display:none;">
+            <li>
+                转移<span id="reassignPerson" class="cc_people"
+                        style="display:none; float:right; margin:12px 45px 0px 0px;"></span><a href="#"
+                                                                                               class="rt_line"></a>
+            </li>
+            <div class="cc_copy_count" id="reassign_List" style="display:none;">
+
+            </div>
+        </ul>
+
+        <div class="cc_mar12"></div>
+        <ul class="organization" id="AddPreApprove" style="display:none;">
+            <li>
+                前加签(<span id="AddPreApprove_Sum">0</span>)<a href="#" class="rt_line"></a>
+            </li>
+            <div class="cc_copy_count" id="AddPreApprove_List" style="display:none;">
+
+            </div>
+        </ul>
+
+        <div class="cc_mar12"></div>
+        <ul class="organization" id="AddAfterApprove" style="display:none;">
+            <li>
+                后加签(<span id="AddAfterApprove_Sum">0</span>)<a href="#" class="rt_line"></a>
+            </li>
+            <div class="cc_copy_count" id="AddAfterApprove_List" style="display:none;">
+
+            </div>
+        </ul>
+
+        <div class="fqxt_yf" id="serialORparallel" style="display:none;">
+            <ul class="lczh_yz" style="margin-top:0px;">
+                <li>流程进行方式
+                    <div class="button_ch" id="serialORparallel_select"><span
+                            class="button_ch_lf button_qz left serialORparallel_slected">并行</span><span
+                            class="button_ch_rt button_hq right">串行</span></div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cc_mar12"></div>
+        <ul class="organization" id="carbonCopy" style="display:none;">
+            <li>
+                抄送(<span id="carbonCopy_Sum">0</span>)<a href="#" class="rt_line"></a>
+            </li>
+            <div class="cc_copy_count" id="carbonCopy_List" style="display:none;">
+
+            </div>
+        </ul>
+    </div>
+    <ul class="bottom_submit" id="bottom_submit_div">
+        <li id="doAction_cancel">取消</li>
+        <li class="submit" id="doAction_submit">提交</li>
+    </ul>
+</div>
+
+<div class="mask" id="alreadySelected" style="display:none;">
+    <!-- 选择指派人 -->
+    <div class="assign_count" id="assign_count" style="display:none;">
+        <div class="assign_people">
+            <ul class="assign_people_ul">
+                <li><span class="assignToLabel">选择人员:</span></li>
+                <li id="assign_person"><!--控制在10个字超出部分...--></li>
+                <li><a href="javascript:void(0);" class="point" id="showUserList"></a></li>
+            </ul>
+        </div>
+        <div class="assign_people_text" id="alSelectedPersons">
+        </div>
+        <div class="assign_people_btns">
+            <a href="javascript:void(0);" class="Determine" id="alSelectedDiv_cancel"><span
+                    class="cancelLabel">取消</span></a>
+            <a href="javascript:void(0);" class="font_bload" id="alSelectedDiv_submit"><span
+                    class="aprovalLabel">确定</span></a>
+        </div>
+    </div>
+
+
+    <!-- 多项选择模块 -->
+    <div id="selectDiv" class="assign_modalOA" style="display:none;">
+        <div class="search">
+            <div class="search_input">
+                <div class="search_center" style="display:none;"><span class="search_icon"></span>搜索</div>
+                <span class="search_on"></span>
+                <form name="selectForm" id="selectForm" action=".">
+                    <input type="search" name="selectItems_search" id="selectItems_search"
+                           class="search_on_input multip" placeholder="用户名称/用户编码"
+                           oninput="searchUserList(this);" onpropertychange="searchUserList(this);" results="0"
+                           autocomplete="off" autocapitalize="none"/>
+                </form>
+            </div>
+        </div>
+
+        <!-- 选项列表 -->
+        <ul class="select_mode" id="selectItems">
+            <!-- <li>杨颖<span class="inputno"></span></li>
+            <li>张春杰<span class="inputno"></span></li>
+            <li>张坤<span class="inputno"></span></li> -->
+        </ul>
+        <div class="assign_people_btns">
+            <a href="javascript:void(0);" class="Determine"><span id="selectDiv_cancel">取消</span></a>
+            <a href="javascript:void(0);" class="font_bload"><span id="selectDiv_submit">确定</span></a>
+        </div>
+    </div>
+
+    <!-- 单项选择模块（此处主要用于常用语的选择） -->
+    <div id="singleSelectDiv" class="assign_modalOA" style="display:none;">
+        <div class="search">
+            <div class="search_input">
+                <div class="search_center" style="display:none;"><span class="search_icon"></span>搜索</div>
+                <span class="search_on"></span>
+                <input type="search" name="singleSelectItems_search" id="singleSelectItems_search" form="selectForm"
+                       class="search_on_input multip"
+                       placeholder="用户名称/用户编码"
+                       oninput="searchUserList(this);" onpropertychange="searchUserList(this);" results="0"
+                       autocomplete="off" autocapitalize="none"/>
+                <a href="" class="search_result_on_closed"></a>
+            </div>
+        </div>
+        <ul class="select_mode" id="singleSelectItems">
+            <!-- <li>杨颖<span class="inputno"></span></li>
+            <li>张春杰<span class="inputno"></span></li>
+            <li>张坤<span class="inputno"></span></li> -->
+        </ul>
+        <div class="assign_people_btns">
+            <a href="javascript:void(0);" class="Determine"><span id="singleSelect_cancel">取消</span></a>
+            <a href="javascript:void(0);" class="font_bload"><span id="singleSelect_submit">确定</span></a>
+        </div>
+    </div>
+
+</div>
+
+<div class="mask" id="cancelSelected" style="display:none;">
+    <!-- 取消提示 -->
+    <div class="assign_count" id="cancel_alert" style="display:none;">
+        <div class="assign_people">
+            <ul class="assign_people_ul">
+                <li><span class="assignToLabel">您确定要放弃吗？</span></li>
+            </ul>
+        </div>
+        <div class="assign_people_btns">
+            <a href="javascript:void(0);" class="Determine" id="calertDiv_cancel"><span
+                    class="cancelLabel">取消</span></a>
+            <a href="javascript:void(0);" class="font_bload" id="calertDiv_submit"><span class="aprovalLabel">确定</span></a>
+        </div>
+    </div>
+</div>
+
+<!-- 搜索模块 -->
+<div id="searchDiv" class="search_result" style="display:none;">
+    <a href="#" class="search_result_qx" id="cancelSearch">取消</a>
+    <div class="search_result_input">
+        <span class="search_result_on"></span><input type="text" placeholder="用户名称/用户编码" id="searchDiv_input"
+                                                     class="search_result_on_input"
+                                                     style="width:78%; height:30px; border:none; padding: 0 0px; margin-bottom: 0px; background:#e8ecf1;"/>
+    </div>
+
+    <ul class="select_mode" id="searchDivItems">
+        <!-- <li>杨颖</li>
+        <li>张春杰</li>
+        <li>张坤</li> -->
+    </ul>
+</div>
+
+<div class="mask" id="handWrite" style="display:none; background:#fff;">
+    <div>
+        <div id="signatureparent">
+            <div id="signature"></div>
+        </div>
+        <div id="scrollgrabber"></div>
+        <div class="revoke"></div>
+    </div>
+    <div class="footer" style="text-align:center;">
+        <ul class="bottom_submit">
+            <li id="OAHandWrite_cancel">取消</li>
+            <li class="submit" id="OAHandWrite_submit">确定</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
+<script src="js/lib/require.js"></script>
+<script>
+    requirejs(['./js/common'], function(common) {
+        require(['app/OAdoAction', './js/app/OAdoActionLang.js', 'jSignature'], function(OAdoAction) {
+            OAdoAction.init();
+        }, function(error) {
+            console.error(error);
+        });
+    });
+</script>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+<meta content="telephone=no" name="format-detection" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>loading...</title>
+<link href="css/global.css" rel="stylesheet" type="text/css">
+<link href="css/nc_layout.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="nav-wrapper" id="navTab">
+		<ul class="documentdetail_tab" id="nav"></ul>
+</div>
+<article id="dillDetailList">
+	<section style="width:100%;height:auto;"></section>
+</article>
+
+</body>
+</html>
+<script src="js/lib/require.js"></script>
+<script>
+	requirejs(['./js/common'], function(common) {
+		require(['app/billDetailSubitem', './js/app/billDetailSubitemLang.js'], function(billDetailSubitem) {
+			billDetailSubitem.init();
+		}, function(error) {
+			console.error(error);
+		});
+	});
+</script>

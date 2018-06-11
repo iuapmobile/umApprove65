@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+          name="viewport"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">   
+
+    <title>loading...</title>
+    <link href="css/global.css" rel="stylesheet" type="text/css">
+    <link href="css/nc_layout.css" rel="stylesheet" type="text/css">
+    <link href="css/scrollbar.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+       tr,td{
+            -webkit-font-smoothing:antialiased
+       }
+    </style>
+
+</head>
+<body>
+<div class="document_detail" id="pictrue" style="overflow:scroll;">
+    <div></div>
+</div>
+<!-- 审批动作 -->
+<footer class="footer" id="taskAction"></footer>
+<div class="mask" id="assign" style="display:none;">
+    <!-- 选择指派人 -->
+    <div class="assign_count" id="assign_count">
+        <div class="assign_people">
+            <ul class="assign_people_ul">
+                <li><span class="assignToLabel"><!-- 指派给: --></span></li>
+                <li id="assign_person"><!--控制在10个字超出部分...--></li>
+                <li><a href="#" class="point" id="showUserList"></a></li>
+            </ul>
+        </div>
+        <div class="assign_people_text">
+            <textarea name="" cols="" rows="" placeholder="<!-- 请在此处输入内容 -->" class="assign_text"></textarea>
+        </div>
+        <div class="assign_people_btns">
+            <a href="javascript:void(0);" class="Determine" id="closeShenpi"><span
+                    class="cancelLabel"><!-- 取消 --></span></a>
+            <a href="javascript:void(0);" class="font_bload" id="shenpi"><span
+                    class="aprovalLabel"><!-- 批准 --></span></a>
+        </div>
+    </div>
+
+
+    <!-- 指派人 -->
+    <div class="assign_modal" id="userList" style="display:none;">
+        <div class="select">
+            <a href="#" class="select_icon"></a>
+			<span class="input_wrapper">
+				<form name="selectForm" id="selectForm" action=".">
+				<input id="search_input"
+                       type="search"
+                       oninput="searchUserList(this.value);"
+                       onpropertychange="searchUserList(this.value);"
+                       class="inputreject search_text"
+                       placeholder="<!-- 搜索 -->"
+                       results="0"
+                       autocomplete="off" autocapitalize="none"/>
+				</form>
+			</span>
+        </div>
+        <div class="contact_person_count"></div>
+        <div class="assign_people_btns">
+            <a href="javascript:void(0);" class="Determine" id="userListCancal"><span
+                    class="cancelLabel"><!-- 取消 --></span></a>
+            <a href="javascript:void(0);" class="font_bload" id="userListSure"><span
+                    class="determineLabel"><!-- 确定 --></span></a>
+        </div>
+    </div>
+</div>
+
+<div class="mask" id="personInfo" style="display:none;"></div>
+</body>
+</html>
+<script src="js/lib/require.js"></script>
+<script>
+    requirejs(['./js/common'], function(common) {
+        require(['app/billContent', './js/app/billContentLang.js'], function(billContent) {
+            billContent.init();
+        }, function(error) {
+            console.error(error);
+        });
+    });
+</script>
